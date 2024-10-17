@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Pokemon list code challenge copilot iq
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
