@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PokemonTable from './PokemonTable';
 import './App.css';
 
 const URL = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
@@ -20,9 +21,7 @@ function App() {
   return (
     <div className="App">
       <h1>Table of pokemons</h1>
-      <ul>
-      {pokemonsList.map((pokemon, idx) => <li key={idx}>{JSON.stringify(pokemon)}</li>)}
-      </ul>
+      <PokemonTable pokemons={pokemonsList} />
     </div>
   );
 }
