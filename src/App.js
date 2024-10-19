@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PokemonTable from './components/PokemonTable';
-import { fetchPokemons } from './helpers/PokeRepo';
+import { getPokemons } from './helpers/PokeRepo';
+import PokeCard from './components/PokeCard';
 import './App.css';
 
 function App() {
@@ -8,16 +9,16 @@ function App() {
 
   useEffect(() => {
     const fetcher = async () => {
-      const pokemonData = await fetchPokemons();
+      const pokemonData = await getPokemons(20,10);
       setPokemonsList(pokemonData);
     }
     fetcher();
   }, []);
 
-  console.log(pokemonsList)
   return (
     <div className="App">
       <PokemonTable pokemons={pokemonsList} />
+      <PokeCard pokemonName={'nidoran-f'} />
     </div>
   );
 }

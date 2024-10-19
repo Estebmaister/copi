@@ -3,7 +3,7 @@ const DEFAULT_LIMIT = 10;
 
 // Returns a list of pokemons from the base URL with a variable offset
 // and default limit as 10, logs an error to the console in case it fails.
-export const fetchPokemons = async (offset = 0, limit = DEFAULT_LIMIT) => {
+export const getPokemons = async (offset = 0, limit = DEFAULT_LIMIT) => {
   let results = [];
   try {
     const response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
@@ -17,3 +17,30 @@ export const fetchPokemons = async (offset = 0, limit = DEFAULT_LIMIT) => {
   }
   return results
 };
+
+// Returns a dictionary with the information of a certain pokemon by name
+export const getPokemonByName = async (name) => {
+  let pokemon = {};
+  try {
+    const response = await fetch(`${BASE_URL}/${name}`);
+    if (!response.ok) {
+      throw new Error(`fetchPokemon (${name}) response status: ${response.status}`);
+    }
+    pokemon = await response.json();
+  } catch (error) {
+    console.error("Error fetching the Pokemon data:", error);
+  }
+  return pokemon
+};
+
+// Creates an image link from a pokemon ID
+export const getPokemonImgLinkByID = ({id}) => {
+  if (!id) return '';
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+}
+
+// Creates an image link from a pokemon ID
+export const getPokemonImgLinkByName = ({name}) => {
+  if (!name) return '';
+  return `https://img.pokemondb.net/artwork/${name}.jpg`
+}
