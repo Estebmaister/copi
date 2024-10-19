@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import PokemonTable from './components/PokemonTable';
-import { getPokemons } from './helpers/PokeRepo';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PokeTable from './components/PokeTable';
 import PokeCard from './components/PokeCard';
+import { getPokemons } from './helpers/PokeRepo';
 import './App.css';
 
 function App() {
@@ -16,11 +17,13 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <PokemonTable pokemons={pokemonsList} />
-      <PokeCard pokemonName={'nidoran-f'} />
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<PokeTable pokemons={pokemonsList} />} />
+        <Route path="/pokemon/:pokemonName" element={<PokeCard />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

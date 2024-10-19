@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getPokemonByName } from '../helpers/PokeRepo'
 import { capitalize, capitalizeWords } from '../helpers/Strings';
 import { typesToBackgroundStyle } from '../helpers/PokeTypes';
 import { getPokemonImgLinkByName } from '../helpers/PokeRepo';
 import './PokeCard.css';
 
-const PokeCard = ({ pokemonName }) => {
+const PokeCard = () => {
   const [pokemon, setPokemon] = useState(null);
+  const { pokemonName } = useParams();
   
   useEffect(() => {
     const fetcher = async () => {
@@ -18,7 +20,7 @@ const PokeCard = ({ pokemonName }) => {
 
   if (!pokemon) return <div className="card-loader">Loading...</div>;
 
-  const id = pokemon.id.toString().padStart(4, '0');
+  const id = pokemon.id.toString();
   const name = capitalizeWords(pokemon.name);
   const imgLink = getPokemonImgLinkByName(pokemon);
   const types = pokemon.types.map(type => type.type.name);

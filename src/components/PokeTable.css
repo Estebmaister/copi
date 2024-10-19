@@ -1,0 +1,46 @@
+.table-title {
+  text-align: center;
+}
+
+.poke-table {
+  width: 90%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.poke-table th, td {
+  padding: 1em;
+  text-align: center;
+}
+
+.poke-table thead tr {
+  background-color: #95A5A6;
+}
+
+.poke-table tbody tr {
+  border-top: transparent 0.5em solid;
+  border-bottom: transparent 0.5em solid;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.poke-table tbody tr td {
+  padding: 0;
+}
+
+.poke-table tbody tr a {
+  display: block;
+  padding: 8px;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.poke-table tbody tr:hover {
+  background-color: cyan;
+}
+
+.poke-table tr:first-child th:first-child {
+  border-top-left-radius: 1rem;
+}
+.poke-table tr:first-child th:last-child {
+  border-top-right-radius: 1em;
+}
