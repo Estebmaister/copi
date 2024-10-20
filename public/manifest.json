@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Poke Table",
+  "name": "Pokemon table and cards display",
   "icons": [
     {
       "src": "favicon.ico",

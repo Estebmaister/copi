@@ -47,3 +47,7 @@
   opacity: 0.75;
   margin-left: 0.3em; 
 }
+
+.hidden-ability {
+  opacity: 0.5;
+}

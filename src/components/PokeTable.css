@@ -14,8 +14,7 @@
 }
 
 .poke-table thead {
-  background: linear-gradient(217deg, rgba(41, 87, 186, 0.5), rgba(255,0,0,0) 70.71%),
-              linear-gradient(127deg, rgba(181, 181, 64, 0.5), rgba(0,255,0,0) 70.71%);
+  background: linear-gradient(180deg, rgba(41, 87, 186, 0.5), transparent);
 }
 
 .poke-table tbody tr {
@@ -78,5 +77,8 @@ button {
 @media (orientation: portrait) {
   .poke-table td .span-div {
     display: block;
+  }
+  .poke-table tbody tr a {
+    padding: 4px;
   }
 }
