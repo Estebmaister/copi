@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getPokemons } from '../helpers/PokeRepo';
 import PokeTableRow from './PokeTableRow';
 import './PokeTable.css';
@@ -6,8 +7,23 @@ import './PokeTable.css';
 const LIMIT = 10;
 const PokeTable = () => {
   const [pokemons, setPokemons] = useState([]);
-  const [page, setPage] = useState(1);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  let pageParam = searchParams.get('page');
+  pageParam = +pageParam ? +pageParam : 1;
+  const [page, setPage] = useState(pageParam);
   const [totalPages, setTotalPages] = useState(0);
+
+  const onPageChange = (page) => {
+    setPage(page)
+    setSearchParams(prevParams => {
+      prevParams.set('page', page);
+      return prevParams;
+    });
+  };
+
+  const onPagePrev = (page) => onPageChange(Math.max(+page - 1, 1));
+  const onPageNext = (page) => onPageChange(Math.min(+page + 1, totalPages));
 
   useEffect(() => {
     const offset = (page - 1) * LIMIT;
@@ -17,16 +33,17 @@ const PokeTable = () => {
       setTotalPages(Math.ceil(count / LIMIT));
     }
     fetcher();
-  }, [page]);
+    setPage(pageParam)
+  }, [page, pageParam]);
 
   return (<>
     <h1 className="table-title">Table of pokemons</h1>
     <div className="pagination">
-      <button onClick={() => setPage((p) => Math.max(p - 1, 1))} disabled={page === 1}>
+      <button onClick={() => onPagePrev(page)} disabled={page === 1}>
         Previous
       </button>
       <span>Page {page} of {totalPages}</span>
-      <button onClick={() => setPage((p) => Math.min(p + 1, totalPages))} disabled={page === totalPages}>
+      <button onClick={() => onPageNext(page)} disabled={page === totalPages}>
         Next
       </button>
     </div>
@@ -39,7 +56,7 @@ const PokeTable = () => {
       </thead>
       <tbody>
         {pokemons.map(({name, id, url}) => (
-          <PokeTableRow name={name} id={id} url={url}/>
+          <PokeTableRow key={name} name={name} id={id} url={url}/>
         ))}
       </tbody>
     </table>
