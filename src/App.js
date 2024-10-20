@@ -1,12 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import PokeTable from './components/PokeTable';
 import PokeCard from './components/PokeCard';
 
-const basename = document.querySelector('base')?.getAttribute('href') ?? '/'
-
 function App() {
   return (
-    <Router basename={basename}>
+    <Router>
       <Routes>
         <Route exact path="/" element={<PokeTable />} />
         <Route path="/pokemon/:pokemonName" element={<PokeCard />} />
