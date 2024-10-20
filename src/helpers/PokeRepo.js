@@ -36,13 +36,13 @@ export const getPokemonByName = async (name) => {
 };
 
 // Creates an image link from a pokemon ID
-export const getPokemonImgLinkByID = ({id}) => {
+export const getImgLinkForPokemonByID = ({id}) => {
   if (!id) return '';
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 }
 
 // Creates an image link from a pokemon ID
-export const getPokemonImgLinkByName = ({name}) => {
+export const getImgLinkForPokemonByName = ({name}) => {
   if (!name) return '';
   return `https://img.pokemondb.net/artwork/${name}.jpg`
 }

@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPokemonByName } from '../helpers/PokeRepo'
+import { 
+  getPokemonByName, 
+  getImgLinkForPokemonByName, 
+  getImgLinkForPokemonByID 
+} from '../helpers/PokeRepo'
 import { capitalize, capitalizeWords } from '../helpers/Strings';
 import { typesToBackgroundStyle } from '../helpers/PokeTypes';
-import { getPokemonImgLinkByName } from '../helpers/PokeRepo';
 import './PokeCard.css';
 
 const PokeCard = () => {
   const [pokemon, setPokemon] = useState(null);
+  const [onErrorRetried, setOnErrorRetried] = useState(false);
   const { pokemonName } = useParams();
   
   useEffect(() => {
@@ -18,11 +22,17 @@ const PokeCard = () => {
     fetcher();
   }, [pokemonName]);
 
+  const retryImgLinkOnError = (e) => {
+    if (onErrorRetried) return;
+    setOnErrorRetried(true);
+    e.currentTarget.src = getImgLinkForPokemonByID(pokemon);
+  }
+
   if (!pokemon) return <div className="card-loader">Loading...</div>;
 
   const id = pokemon.id.toString();
   const name = capitalizeWords(pokemon.name);
-  const imgLink = getPokemonImgLinkByName(pokemon);
+  const imgLink = getImgLinkForPokemonByName(pokemon);
   const types = pokemon.types.map(type => type.type.name);
   const typesBackgroundStyle = typesToBackgroundStyle(types);
   const spanTypes = types.map(t => 
@@ -35,14 +45,18 @@ const PokeCard = () => {
   <div className="card" style={typesBackgroundStyle}>
     <div className="inner-card">
       <h2>{name} (#{id})</h2>
-      <img alt={name} src={imgLink} decoding="async" loading="lazy" ></img>
+      <img alt={"No img found"} src={imgLink} decoding="async" loading="lazy" 
+      onError={retryImgLinkOnError}></img>
       <p>Type(s): {spanTypes}</p>
       <div>
         <h3>Abilities:</h3>
         <ul>
-          {pokemon.abilities.map((ability) => (
-            <li key={ability.ability.name}>
-              {capitalizeWords(ability.ability.name)} {ability.is_hidden ? "(Hidden)" : ""}
+          {pokemon.abilities.map((ability, idx) => (
+            <li 
+              key={ability.ability.name + idx} 
+              className={ability.is_hidden ? "hidden-ability" : ""}>
+              {capitalizeWords(ability.ability.name)}
+              {ability.is_hidden ? " (Hidden)" : ""}
             </li>
           ))}
         </ul>
