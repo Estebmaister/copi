@@ -29,6 +29,7 @@ const PokeCard = () => {
   }
 
   if (!pokemon) return <div className="card-loader">Loading...</div>;
+  if (!pokemon.id) return <div className="card-loader">No pokemon was found by name provided</div>;
 
   const id = pokemon.id.toString();
   const name = capitalizeWords(pokemon.name);

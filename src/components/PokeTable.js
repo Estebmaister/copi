@@ -5,12 +5,17 @@ import PokeTableRow from './PokeTableRow';
 import './PokeTable.css';
 
 const LIMIT = 10;
+
+const pageParamValidator = (page) => {
+  page = +page;
+  return page > 1 ? page : 1;
+}
+
 const PokeTable = () => {
   const [pokemons, setPokemons] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  let pageParam = searchParams.get('page');
-  pageParam = +pageParam ? +pageParam : 1;
+  let pageParam = pageParamValidator(searchParams.get('page'));
   const [page, setPage] = useState(pageParam);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -33,8 +38,12 @@ const PokeTable = () => {
       setTotalPages(Math.ceil(count / LIMIT));
     }
     fetcher();
+    if (pageParam > totalPages) {
+      setPage(totalPages)
+      return
+    }
     setPage(pageParam)
-  }, [page, pageParam]);
+  }, [page, pageParam, totalPages]);
 
   return (<>
     <h1 className="table-title">Table of pokemons</h1>

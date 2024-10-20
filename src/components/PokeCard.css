@@ -8,7 +8,7 @@
   min-height: fit-content;
 }
 
-.card {
+.card, .card-loader {
   min-width: fit-content;
   margin: 5%;
   margin-top: 5vh;
