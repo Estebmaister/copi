@@ -1,5 +1,9 @@
 # Pokemon list code challenge Copilot IQ
 
+## Live view
+
+The project can be tested on the URL deployed by GH-Pages [link](https://estebmaister.github.io/copi/)
+
 ## Project Overview
 
 This project is a Pokemon list code challenge implemented using React. It showcases the integration of a pokemon API to retrieve information with a structured code base and components to navigate the results with an amicable UI.
