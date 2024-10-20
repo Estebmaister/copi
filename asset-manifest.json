@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://estebmaister.github.io/copi/static/css/main.d3df1db1.css",
-    "main.js": "https://estebmaister.github.io/copi/static/js/main.405d18d3.js",
-    "static/js/453.2dbab0f2.chunk.js": "https://estebmaister.github.io/copi/static/js/453.2dbab0f2.chunk.js",
-    "index.html": "https://estebmaister.github.io/copi/index.html",
-    "main.d3df1db1.css.map": "https://estebmaister.github.io/copi/static/css/main.d3df1db1.css.map",
-    "main.405d18d3.js.map": "https://estebmaister.github.io/copi/static/js/main.405d18d3.js.map",
-    "453.2dbab0f2.chunk.js.map": "https://estebmaister.github.io/copi/static/js/453.2dbab0f2.chunk.js.map"
+    "main.css": "./static/css/main.d3df1db1.css",
+    "main.js": "./static/js/main.d139cf9a.js",
+    "static/js/453.7e98cf36.chunk.js": "./static/js/453.7e98cf36.chunk.js",
+    "index.html": "./index.html",
+    "main.d3df1db1.css.map": "./static/css/main.d3df1db1.css.map",
+    "main.d139cf9a.js.map": "./static/js/main.d139cf9a.js.map",
+    "453.7e98cf36.chunk.js.map": "./static/js/453.7e98cf36.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d3df1db1.css",
-    "static/js/main.405d18d3.js"
+    "static/js/main.d139cf9a.js"
   ]
 }
