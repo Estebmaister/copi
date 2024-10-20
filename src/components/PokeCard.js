@@ -12,8 +12,8 @@ const PokeCard = () => {
   
   useEffect(() => {
     const fetcher = async () => {
-      const pokemonData = await getPokemonByName(pokemonName);
-      setPokemon(pokemonData);
+      const {pokemon} = await getPokemonByName(pokemonName);
+      setPokemon(pokemon);
     }
     fetcher();
   }, [pokemonName]);
@@ -25,16 +25,18 @@ const PokeCard = () => {
   const imgLink = getPokemonImgLinkByName(pokemon);
   const types = pokemon.types.map(type => type.type.name);
   const typesBackgroundStyle = typesToBackgroundStyle(types);
+  const spanTypes = types.map(t => 
+    <span 
+      key={t} style={typesToBackgroundStyle([t])} 
+      className="type-span" > {capitalize(t)} </span>
+  );
 
   return (
   <div className="card" style={typesBackgroundStyle}>
     <div className="inner-card">
       <h2>{name} (#{id})</h2>
       <img alt={name} src={imgLink} decoding="async" loading="lazy" ></img>
-      <p>Type(s): {types.map(t => (
-        <span key={t} style={typesToBackgroundStyle([t])} 
-        className="type-span" > {capitalize(t)} </span>
-      ))}</p>
+      <p>Type(s): {spanTypes}</p>
       <div>
         <h3>Abilities:</h3>
         <ul>

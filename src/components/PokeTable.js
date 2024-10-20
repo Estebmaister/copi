@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { capitalizeWords } from "../helpers/Strings";
-import { Link } from 'react-router-dom';
 import { getPokemons } from '../helpers/PokeRepo';
+import PokeTableRow from './PokeTableRow';
 import './PokeTable.css';
 
 const LIMIT = 10;
@@ -13,9 +12,9 @@ const PokeTable = () => {
   useEffect(() => {
     const offset = (page - 1) * LIMIT;
     const fetcher = async () => {
-      const pokemonData = await getPokemons(offset, LIMIT);
-      setPokemons(pokemonData);
-      setTotalPages(Math.ceil(pokemonData.count / LIMIT));
+      const {pokemons, count} = await getPokemons(offset, LIMIT);
+      setPokemons(pokemons);
+      setTotalPages(Math.ceil(count / LIMIT));
     }
     fetcher();
   }, [page]);
@@ -39,19 +38,8 @@ const PokeTable = () => {
         </tr>
       </thead>
       <tbody>
-        {pokemons.map(({name, url, id}) => (
-          <tr key={id} style={{ cursor: 'pointer' }} >
-            <td>
-              <Link to={`/pokemon/${name}`} className="pokemon-link">
-                {capitalizeWords(name)}
-              </Link>
-            </td>
-            <td>
-              <Link to={`/pokemon/${name}`} className="pokemon-link">
-                {url}
-              </Link>
-            </td>
-          </tr>
+        {pokemons.map(({name, id, url}) => (
+          <PokeTableRow name={name} id={id} url={url}/>
         ))}
       </tbody>
     </table>

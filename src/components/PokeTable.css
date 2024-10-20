@@ -3,7 +3,7 @@
 }
 
 .poke-table {
-  width: 90%;
+  width: 95%;
   margin: auto;
   border-collapse: collapse;
 }
@@ -13,11 +13,13 @@
   text-align: center;
 }
 
-.poke-table thead tr {
-  background-color: #95A5A6;
+.poke-table thead {
+  background: linear-gradient(217deg, rgba(41, 87, 186, 0.5), rgba(255,0,0,0) 70.71%),
+              linear-gradient(127deg, rgba(181, 181, 64, 0.5), rgba(0,255,0,0) 70.71%);
 }
 
 .poke-table tbody tr {
+  cursor: 'pointer';
   border-top: transparent 0.5em solid;
   border-bottom: transparent 0.5em solid;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
@@ -58,4 +60,23 @@ button {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.poke-table td .type-span {
+  display: inline-block;
+  font-size: 0.8em;
+  padding: 2px;
+  opacity: 0.75;
+  margin-left: 0.3em;
+  border-radius: 5px;
+}
+
+.poke-table td .span-div {
+  display: inline-block;
+}
+
+@media (orientation: portrait) {
+  .poke-table td .span-div {
+    display: block;
+  }
 }
